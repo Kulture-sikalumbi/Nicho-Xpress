@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nicho-Xpress | Zambian Direct Marketplace & Smart Sourcing</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            emerald: '#034E35',
+                            emeraldHover: '#023826',
+                            emeraldLight: '#E6F0EC',
+                            copper: '#C86428',
+                            copperHover: '#B0541E',
+                            copperLight: '#FDF3ED',
+                            canvas: '#FAF8F5'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #FAF8F5;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.8; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
+        .animate-glow {
+            animation: pulseGlow 3s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body class="text-slate-800 antialiased min-h-screen flex flex-col">
+
+    <!-- TOP ANNOUNCEMENT / ZAMBIAN NATIONWIDE DELIVERIES -->
+    <div class="bg-brand-emerald text-white text-xs font-semibold py-2 px-4">
+        <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
+            <div class="flex items-center gap-2">
+                <span class="bg-brand-copper text-white text-[10px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider">🇿🇲 Nationwide Zambia</span>
+                <span class="text-emerald-100 hidden sm:inline">Deliveries in Lusaka, Ndola, Kitwe, Livingstone, Kabwe & Countrywide</span>
+            </div>
+            <div class="flex items-center gap-4 text-[11px] ml-auto sm:ml-0">
+                <span class="text-amber-300 font-bold flex items-center gap-1">
+                    <i data-lucide="shield-check" class="w-3.5 h-3.5"></i> 100% Verified Sourcing Guarantee
+                </span>
+                <button onclick="openAdminModal()" class="bg-emerald-900/80 hover:bg-emerald-900 text-emerald-200 hover:text-white px-2.5 py-1 rounded-lg transition flex items-center gap-1 border border-emerald-700/50">
+                    <i data-lucide="layout-dashboard" class="w-3 h-3"></i> Admin Portal
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN NAVIGATION HEADER -->
+    <header class="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20 gap-3 md:gap-6">
+                
+                <!-- BRAND LOGO -->
+                <div class="flex items-center gap-3 cursor-pointer shrink-0" onclick="resetSearch()">
+                    <div class="w-12 h-12 bg-brand-emerald rounded-2xl flex items-center justify-center text-white shadow-lg shadow-brand-emerald/20 border-2 border-brand-copper/30 relative">
+                        <span class="font-extrabold text-2xl tracking-tighter">N</span>
+                        <span class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-brand-copper border-2 border-white flex items-center justify-center text-[8px] text-white">🇿🇲</span>
+                    </div>
+                    <div>
+                        <div class="font-extrabold text-xl sm:text-2xl tracking-tight text-slate-900 flex items-center">
+                            Nicho<span class="text-brand-copper">-Xpress</span>
+                        </div>
+                        <p class="text-[10px] tracking-wider uppercase font-bold text-slate-400 -mt-1">Zambia's Anything Store</p>
+                    </div>
+                </div>
+
+                <!-- GLOBAL UNIFIED SEARCH BAR -->
+                <div class="flex-1 max-w-xl mx-1 md:mx-4">
+                    <div class="relative">
+                        <input 
+                            type="text" 
+                            id="globalSearchInput" 
+                            oninput="handleSearchInput(this.value)" 
+                            placeholder="What do you want to buy or order today?" 
+                            class="w-full bg-slate-100 focus:bg-white text-slate-900 placeholder-slate-400 text-xs sm:text-sm rounded-full pl-10 sm:pl-11 pr-24 py-3 sm:py-3.5 border border-slate-200 focus:border-brand-emerald focus:ring-4 focus:ring-brand-emerald/10 transition outline-none font-medium"
+                        />
+                        <i data-lucide="search" class="w-4 sm:w-5 h-4 sm:h-5 text-slate-400 absolute left-3.5 sm:left-4 top-1/2 -translate-y-1/2"></i>
+                        <button 
+                            onclick="openProactiveAssistantModal(document.getElementById('globalSearchInput').value)"
+                            class="absolute right-1.5 top-1/2 -translate-y-1/2 bg-brand-copper hover:bg-brand-copperHover text-white font-bold text-xs px-3 sm:px-4 py-1.5 sm:py-2 rounded-full transition shadow-xs flex items-center gap-1">
+                            <span>Find It</span>
+                            <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- ACTION BUTTONS -->
+                <div class="flex items-center gap-2 sm:gap-3 shrink-0">
+                    <button 
+                        onclick="openSourcingModal()" 
+                        class="hidden md:flex items-center gap-2 bg-brand-copperLight text-brand-copper hover:bg-brand-copper hover:text-white font-bold text-xs px-4 py-3 rounded-xl transition border border-brand-copper/30">
+                        <i data-lucide="plus-circle" class="w-4 h-4"></i>
+                        <span>Custom Order</span>
+                    </button>
+
+                    <!-- CART BUTTON -->
+                    <button 
+                        onclick="toggleCartDrawer()" 
+                        class="relative bg-brand-emeraldLight hover:bg-brand-emerald/10 p-3 rounded-xl text-brand-emerald transition border border-brand-emerald/20">
+                        <i data-lucide="shopping-bag" class="w-5 sm:w-6 h-5 sm:h-6"></i>
+                        <span id="cartBadge" class="absolute -top-1.5 -right-1.5 bg-brand-copper text-white font-black text-[10px] w-5 h-5 rounded-full flex items-center justify-center border-2 border-white shadow-xs">0</span>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- CATEGORY NAVIGATION STRIP -->
+        <div class="bg-slate-100/80 border-t border-slate-200 px-4 py-2">
+            <div class="max-w-7xl mx-auto flex items-center gap-2 overflow-x-auto hide-scrollbar text-xs font-semibold text-slate-700">
+                <span class="text-slate-400 text-[11px] font-bold uppercase tracking-wider pr-2 border-r border-slate-300 shrink-0">Filter:</span>
+                <button onclick="filterCategory('all', this)" class="cat-btn bg-brand-emerald text-white px-3.5 py-1.5 rounded-lg transition shrink-0 shadow-xs">All Products</button>
+                <button onclick="filterCategory('local', this)" class="cat-btn hover:bg-white text-slate-700 px-3.5 py-1.5 rounded-lg transition shrink-0">⚡ Local Stock (Lusaka/Ndola)</button>
+                <button onclick="filterCategory('overseas', this)" class="cat-btn hover:bg-white text-slate-700 px-3.5 py-1.5 rounded-lg transition shrink-0">✈️ Overseas Imports (10-14 Days)</button>
+                <button onclick="filterCategory('Electronics', this)" class="cat-btn hover:bg-white text-slate-700 px-3.5 py-1.5 rounded-lg transition shrink-0">Electronics</button>
+                <button onclick="filterCategory('Solar', this)" class="cat-btn hover:bg-white text-slate-700 px-3.5 py-1.5 rounded-lg transition shrink-0">Solar & Power</button>
+                <button onclick="filterCategory('Fashion', this)" class="cat-btn hover:bg-white text-slate-700 px-3.5 py-1.5 rounded-lg transition shrink-0">Fashion</button>
+                
+                <button onclick="openSourcingModal()" class="ml-auto text-brand-copper hover:text-brand-copperHover font-bold flex items-center gap-1 whitespace-nowrap pl-4 shrink-0">
+                    <i data-lucide="help-circle" class="w-3.5 h-3.5"></i> Unlisted Item? Request Here
+                </button>
+            </div>
+        </div>
+
+        <!-- LIVE SOCIAL PROOF & SOURCING TICKER RIBBON -->
+        <div class="bg-slate-900 text-white text-xs py-2 px-4 border-t border-slate-800 overflow-hidden relative shadow-inner">
+            <div class="max-w-7xl mx-auto flex items-center gap-3">
+                <div class="flex items-center gap-1.5 bg-brand-copper text-white text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full tracking-wider shrink-0 shadow-xs">
+                    <span class="w-2 h-2 rounded-full bg-amber-300 animate-ping"></span>
+                    <span>Live Activity</span>
+                </div>
+                
+                <!-- ROTATING TICKER DISPLAY -->
+                <div class="relative flex-1 overflow-hidden h-5">
+                    <div id="liveTickerText" class="absolute left-0 top-0 transition-all duration-500 transform translate-y-0 text-slate-200 font-medium text-[11px] sm:text-xs flex items-center gap-2 whitespace-nowrap">
+                        <!-- Dynamic live activity updates injected via JavaScript -->
+                    </div>
+                </div>
+
+                <div class="hidden md:flex items-center gap-3 text-[10px] text-slate-400 font-bold uppercase tracking-wider shrink-0 pl-2 border-l border-slate-700">
+                    <span class="flex items-center gap-1 text-emerald-400"><i data-lucide="check-circle2" class="w-3 h-3"></i> Zambian Kwacha (ZMW)</span>
+                    <span class="flex items-center gap-1 text-amber-300"><i data-lucide="plane-landing" class="w-3 h-3"></i> Direct Imports</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 3-STEP PROCESS BANNER -->
+    <section class="bg-white border-b border-slate-200/80 py-6 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center max-w-2xl mx-auto mb-5">
+                <span class="text-brand-copper font-extrabold text-xs uppercase tracking-widest bg-brand-copperLight px-3 py-1 rounded-full">How Nicho-Xpress Works</span>
+                <h2 class="text-lg sm:text-2xl font-extrabold text-slate-900 mt-1">If it exists anywhere, we deliver it to you in Zambia.</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="bg-brand-canvas p-4 rounded-2xl border border-slate-200 flex items-start gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-brand-emerald text-white font-black text-lg flex items-center justify-center shrink-0">1</div>
+                    <div>
+                        <h3 class="font-extrabold text-slate-900 text-sm">Search or Upload Photo</h3>
+                        <p class="text-xs text-slate-600 mt-0.5">Browse ready stock or drop a photo/screenshot of what you need.</p>
+                    </div>
+                </div>
+                <div class="bg-brand-canvas p-4 rounded-2xl border border-slate-200 flex items-start gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-brand-copper text-white font-black text-lg flex items-center justify-center shrink-0">2</div>
+                    <div>
+                        <h3 class="font-extrabold text-slate-900 text-sm">We Find Local or Overseas Supplier</h3>
+                        <p class="text-xs text-slate-600 mt-0.5">We check local stock or import directly with zero hassle for you.</p>
+                    </div>
+                </div>
+                <div class="bg-brand-canvas p-4 rounded-2xl border border-slate-200 flex items-start gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-slate-900 text-white font-black text-lg flex items-center justify-center shrink-0">3</div>
+                    <div>
+                        <h3 class="font-extrabold text-slate-900 text-sm">Pay in Kwacha & Get Delivered</h3>
+                        <p class="text-xs text-slate-600 mt-0.5">Pay securely with MTN, Airtel, or Zamtel. Doorstep delivery nationwide!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN PRODUCT / CONTENT AREA -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full">
+        
+        <!-- SEARCH HEADER BANNER -->
+        <div id="searchHeader" class="hidden mb-6 flex flex-wrap items-center justify-between gap-4 bg-brand-emeraldLight border border-brand-emerald/20 rounded-2xl p-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-brand-emerald text-white flex items-center justify-center font-bold">
+                    <i data-lucide="search" class="w-5 h-5"></i>
+                </div>
+                <div>
+                    <h3 class="font-bold text-slate-900 text-sm sm:text-base">Results for "<span id="searchQueryTerm" class="text-brand-emerald"></span>"</h3>
+                    <p id="searchCountText" class="text-xs text-slate-600">Searching local inventory in Zambia...</p>
+                </div>
+            </div>
+            <button onclick="resetSearch()" class="text-xs font-bold text-slate-700 bg-white hover:bg-slate-100 px-3.5 py-2 rounded-xl border border-slate-200 shadow-xs">
+                Clear Search
+            </button>
+        </div>
+
+        <!-- PRODUCT GRID CONTAINER -->
+        <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Products rendered dynamically -->
+        </div>
+
+        <!-- FALLBACK CARD (0 Search Results) -->
+        <div id="searchFallbackCard" class="hidden my-8">
+            <div class="bg-gradient-to-br from-brand-emerald via-emerald-900 to-slate-900 text-white rounded-3xl p-6 sm:p-10 shadow-xl border border-brand-copper/30 relative overflow-hidden">
+                <div class="max-w-2xl relative z-10 space-y-4">
+                    <div class="inline-flex items-center gap-2 bg-brand-copper text-white font-extrabold text-xs px-3.5 py-1 rounded-full uppercase tracking-wider">
+                        <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> Nicho-Xpress Direct Sourcing
+                    </div>
+
+                    <h3 class="text-2xl sm:text-3xl font-extrabold">
+                        We don't have "<span id="fallbackItemName" class="text-amber-300"></span>" in ready stock, <br>
+                        <span class="text-emerald-300 underline decoration-brand-copper decoration-4">but we can get it for you!</span>
+                    </h3>
+
+                    <p class="text-slate-200 text-xs sm:text-sm leading-relaxed">
+                        Don't stress looking around town. Launch our assistant to attach a photo or specify your item details. Our team will verify suppliers, calculate delivery to Zambia, and send you a ZMW quote!
+                    </p>
+
+                    <div class="pt-2 flex flex-wrap gap-3">
+                        <button 
+                            onclick="openProactiveAssistantModal(document.getElementById('fallbackItemName').innerText)" 
+                            class="bg-brand-copper hover:bg-brand-copperHover text-white font-bold text-xs sm:text-sm px-6 py-3.5 rounded-xl shadow-lg transition flex items-center gap-2">
+                            <i data-lucide="search-check" class="w-4 h-4"></i>
+                            <span>Search / Request Item</span>
+                        </button>
+                        <button onclick="resetSearch()" class="bg-white/10 hover:bg-white/20 text-white text-xs sm:text-sm font-semibold px-5 py-3.5 rounded-xl transition">
+                            Back to Catalog
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 text-slate-400 py-12 px-4 sm:px-6 lg:px-8 border-t border-slate-800 text-xs">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div class="space-y-3">
+                <div class="font-extrabold text-white text-lg flex items-center gap-2">
+                    <div class="w-8 h-8 bg-brand-emerald rounded-lg flex items-center justify-center text-white font-bold text-base border border-brand-copper/40">N</div>
+                    Nicho-Xpress
+                </div>
+                <p class="text-slate-400 leading-relaxed text-xs">
+                    Zambia's direct marketplace and sourcing concierge. Bringing local inventory and overseas imports under one reliable doorstep delivery.
+                </p>
+            </div>
+            <div>
+                <h4 class="font-extrabold text-white mb-3 text-xs uppercase tracking-wider">Mobile Payment Options</h4>
+                <ul class="space-y-2 font-medium">
+                    <li class="flex items-center gap-2 text-slate-300"><span class="w-2 h-2 rounded-full bg-amber-400"></span> MTN Mobile Money (*303#)</li>
+                    <li class="flex items-center gap-2 text-slate-300"><span class="w-2 h-2 rounded-full bg-red-500"></span> Airtel Money Zambia (*115#)</li>
+                    <li class="flex items-center gap-2 text-slate-300"><span class="w-2 h-2 rounded-full bg-green-500"></span> Zamtel Kwacha (*115#)</li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-extrabold text-white mb-3 text-xs uppercase tracking-wider">Delivery Hubs</h4>
+                <p class="text-slate-400 leading-relaxed text-xs">
+                    Lusaka Hub: Great East Rd / CBD<br>
+                    Ndola Hub: Broadway Center<br>
+                    Kitwe Hub: Parklands<br>
+                    Full delivery coverage across all 10 provinces.
+                </p>
+            </div>
+            <div>
+                <h4 class="font-extrabold text-white mb-3 text-xs uppercase tracking-wider">Need Custom Sourcing?</h4>
+                <p class="text-slate-400 leading-relaxed text-xs mb-3">
+                    Have a photo or screenshot of what you want to buy?
+                </p>
+                <button onclick="openSourcingModal()" class="w-full bg-brand-copper hover:bg-brand-copperHover text-white font-bold py-2.5 rounded-xl transition text-xs flex items-center justify-center gap-2">
+                    <i data-lucide="upload" class="w-3.5 h-3.5"></i> Submit Screenshot Order
+                </button>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto border-t border-slate-800 mt-8 pt-6 text-center text-slate-500 text-[11px]">
+            &copy; 2026 Nicho-Xpress Zambia. All Prices in Zambian Kwacha (ZMW).
+        </div>
+    </footer>
+
+    <!-- FLOATING TRIGGER BUTTON -->
+    <div class="fixed bottom-6 right-6 z-40">
+        <button 
+            onclick="openProactiveAssistantModal()" 
+            class="bg-brand-emerald hover:bg-brand-emeraldHover text-white px-4 py-3.5 rounded-full shadow-2xl border-2 border-amber-400 flex items-center gap-2.5 font-bold text-xs animate-glow cursor-pointer">
+            <i data-lucide="sparkles" class="w-5 h-5 text-amber-300"></i>
+            <span>👋 What are you looking to buy?</span>
+        </button>
+    </div>
+
+    <!-- CENTERED PROACTIVE HELPER MODAL -->
+    <div id="proactiveAssistantModal" class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 transition-all">
+        <div class="bg-white rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl border-2 border-brand-emerald/30 relative flex flex-col transform transition-all scale-100">
+            
+            <button onclick="closeProactiveAssistantModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 p-1 bg-slate-100 rounded-full">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+
+            <!-- HEADER -->
+            <div class="flex items-center gap-3 mb-4">
+                <div class="w-12 h-12 rounded-2xl bg-brand-emerald text-white flex items-center justify-center font-bold shrink-0 shadow-md">
+                    <i data-lucide="bot" class="w-7 h-7 text-amber-300"></i>
+                </div>
+                <div>
+                    <span class="text-[10px] font-extrabold uppercase tracking-wider text-brand-copper bg-brand-copperLight px-2.5 py-0.5 rounded-full">Nicho-Xpress Smart Assistant</span>
+                    <h3 class="font-extrabold text-slate-900 text-lg sm:text-xl mt-0.5">What do you want to order or buy?</h3>
+                </div>
+            </div>
+
+            <p class="text-xs sm:text-sm text-slate-600 mb-5 leading-relaxed">
+                Type the name of any item or attach a photo/screenshot. We'll instantly check local stock in Zambia or offer a direct overseas import quote in Kwacha!
+            </p>
+
+            <!-- INPUT STEP -->
+            <div id="helperInputStep" class="space-y-4">
+                
+                <!-- UNIFIED INPUT WITH INLINE ATTACH PHOTO ICON -->
+                <div class="relative bg-slate-50 rounded-2xl border-2 border-slate-200 focus-within:border-brand-emerald focus-within:bg-white p-2 transition shadow-inner">
+                    <div class="flex items-center gap-2">
+                        
+                        <!-- PHOTO ATTACHMENT ICON BUTTON -->
+                        <label class="cursor-pointer bg-brand-emeraldLight hover:bg-brand-emerald/20 text-brand-emerald p-2.5 rounded-xl transition flex items-center gap-1.5 shrink-0" title="Attach Photo / Screenshot">
+                            <i data-lucide="camera" class="w-5 h-5"></i>
+                            <span class="text-[11px] font-extrabold hidden sm:inline">Attach Photo</span>
+                            <input type="file" id="helperImageFile" accept="image/*" onchange="handleHelperImageUpload(event)" class="hidden" />
+                        </label>
+
+                        <!-- TEXT INPUT -->
+                        <input 
+                            type="text" 
+                            id="helperTextInput" 
+                            placeholder="e.g. Solar Generator, Nike Air Max, Toyota Spares..." 
+                            class="w-full bg-transparent border-none text-slate-900 text-xs sm:text-sm font-semibold focus:outline-none placeholder-slate-400 py-1"
+                            onkeydown="if(event.key==='Enter') runSimulatedHelperCheck()"
+                        />
+
+                        <!-- SUBMIT BUTTON -->
+                        <button 
+                            onclick="runSimulatedHelperCheck()" 
+                            class="bg-brand-copper hover:bg-brand-copperHover text-white font-extrabold text-xs px-4 sm:px-5 py-3 rounded-xl transition shadow-md shrink-0 flex items-center gap-1">
+                            <span>Search</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+
+                    <!-- IMAGE PREVIEW THUMBNAIL (IF ATTACHED) -->
+                    <div id="helperImagePreviewBox" class="hidden mt-3 pt-3 border-t border-slate-200 flex items-center justify-between bg-white p-2 rounded-xl border border-slate-200">
+                        <div class="flex items-center gap-2.5">
+                            <img id="helperImagePreview" src="" class="w-12 h-12 object-cover rounded-lg border border-slate-200" />
+                            <div>
+                                <span class="text-xs font-bold text-brand-emerald block">Photo Attached!</span>
+                                <span class="text-[10px] text-slate-400">Ready for Gemini specification check</span>
+                            </div>
+                        </div>
+                        <button onclick="removeHelperImage()" class="text-slate-400 hover:text-red-500 text-xs font-bold p-1">
+                            <i data-lucide="trash-2" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between text-[11px] text-slate-400 font-medium px-1">
+                    <span>💡 Tip: You can upload photos from Amazon, Taobao, or local markets.</span>
+                </div>
+            </div>
+
+            <!-- SCANNING / CHECKING STATE -->
+            <div id="helperScanningStep" class="hidden py-8 text-center space-y-3">
+                <div class="relative w-14 h-14 mx-auto flex items-center justify-center">
+                    <div class="absolute inset-0 border-4 border-brand-emerald/20 border-t-brand-emerald rounded-full animate-spin"></div>
+                    <i data-lucide="search" class="w-6 h-6 text-brand-emerald"></i>
+                </div>
+                <h4 class="font-extrabold text-slate-900 text-sm">Checking Catalog & Import Supplier Databases...</h4>
+                <p id="helperScanStatus" class="text-xs text-slate-500">Searching Lusaka local stock and direct overseas partners...</p>
+            </div>
+
+            <!-- RESULT STEP -->
+            <div id="helperResultStep" class="hidden py-2">
+                <div id="helperResultContainer"></div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- CUSTOM SOURCING REQUEST MODAL -->
+    <div id="sourcingModal" class="fixed inset-0 bg-slate-900/70 backdrop-blur-xs z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-lg w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-slate-100 flex flex-col">
+            
+            <div class="p-5 bg-brand-emerald text-white rounded-t-3xl flex justify-between items-start">
+                <div>
+                    <div class="inline-flex items-center gap-1.5 text-amber-300 text-xs font-bold uppercase tracking-wider mb-1">
+                        <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> Custom Direct Sourcing Concierge
+                    </div>
+                    <h3 class="text-lg font-extrabold">What Do You Want To Order?</h3>
+                    <p class="text-emerald-100 text-xs">Fill in details and our agent will WhatsApp/call you with a ZMW quotation!</p>
+                </div>
+                <button onclick="closeSourcingModal()" class="text-emerald-200 hover:text-white p-1">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <form id="sourcingForm" onsubmit="handleSourcingSubmit(event)" class="p-6 space-y-4">
+                
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Item Name / Description *</label>
+                    <input 
+                        type="text" 
+                        id="sourcingItemName" 
+                        required 
+                        placeholder="e.g. Solar Inverter 5kW, Sony WH-1000XM5, Toyota Axio Headlight..." 
+                        class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:bg-white focus:border-brand-emerald outline-none font-medium"
+                    />
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Target Budget (ZMW)</label>
+                        <input 
+                            type="number" 
+                            id="sourcingBudget" 
+                            placeholder="e.g. 3500" 
+                            class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:bg-white focus:border-brand-emerald outline-none font-medium"
+                        />
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Category</label>
+                        <select id="sourcingCategory" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:bg-white focus:border-brand-emerald outline-none font-medium text-slate-700">
+                            <option value="Electronics">Electronics & Tech</option>
+                            <option value="Solar">Solar & Power</option>
+                            <option value="Fashion">Fashion & Apparel</option>
+                            <option value="Auto Parts">Auto Spare Parts</option>
+                            <option value="Home & Appliances">Home & Appliances</option>
+                            <option value="Other">Other / Special Import</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- PHOTO ATTACHMENT -->
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Attach Photo / Screenshot (Optional)</label>
+                    <div class="border-2 border-dashed border-slate-300 rounded-2xl p-3 text-center cursor-pointer bg-slate-50 hover:border-brand-emerald transition relative">
+                        <input type="file" id="sourcingImageFile" accept="image/*" onchange="previewSourcingImage(event)" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" />
+                        <div id="sourcingPlaceholder" class="space-y-1">
+                            <i data-lucide="camera" class="w-6 h-6 text-slate-400 mx-auto"></i>
+                            <div class="text-xs font-semibold text-slate-600">Click to upload product photo or screenshot</div>
+                        </div>
+                        <div id="sourcingPreviewBox" class="hidden flex items-center justify-center gap-2">
+                            <img id="sourcingPreviewImg" src="" class="h-14 w-14 object-cover rounded-xl border" />
+                            <span class="text-xs font-bold text-brand-emerald">Image attached!</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CONTACT DETAILS -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t border-slate-100">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Your Full Name *</label>
+                        <input type="text" id="sourcingName" required placeholder="e.g. Chileshe Tembo" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm outline-none focus:bg-white focus:border-brand-emerald" />
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Phone / WhatsApp *</label>
+                        <input type="tel" id="sourcingPhone" required placeholder="097X XXX XXX" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm outline-none focus:bg-white focus:border-brand-emerald" />
+                    </div>
+                </div>
+
+                <div class="bg-amber-50 border border-amber-200 rounded-xl p-3 flex items-start gap-2 text-[11px] text-amber-900">
+                    <i data-lucide="shield-check" class="w-4 h-4 text-brand-copper shrink-0 mt-0.5"></i>
+                    <span><strong>100% Free Quote Guarantee:</strong> No payment required until we confirm availability and exact ZMW price with you!</span>
+                </div>
+
+                <button type="submit" class="w-full bg-brand-copper hover:bg-brand-copperHover text-white font-bold py-3.5 rounded-xl shadow-md transition flex items-center justify-center gap-2 text-sm">
+                    <i data-lucide="send" class="w-4 h-4"></i>
+                    <span>Submit Order Request</span>
+                </button>
+
+            </form>
+        </div>
+    </div>
+
+    <!-- CART SIDE DRAWER -->
+    <div id="cartDrawer" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 hidden">
+        <div class="absolute right-0 top-0 bottom-0 max-w-md w-full bg-white shadow-2xl flex flex-col">
+            <div class="p-5 border-b border-slate-200 flex items-center justify-between bg-brand-emerald text-white">
+                <div class="flex items-center gap-2">
+                    <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                    <h3 class="font-extrabold text-base">Your Shopping Cart</h3>
+                </div>
+                <button onclick="toggleCartDrawer()" class="text-emerald-200 hover:text-white">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+
+            <div id="cartItemsList" class="flex-1 overflow-y-auto p-5 space-y-4">
+                <!-- Dynamic Cart Items -->
+            </div>
+
+            <div class="p-5 border-t border-slate-200 bg-slate-50 space-y-3">
+                <div class="flex justify-between items-center text-sm">
+                    <span class="text-slate-500 font-medium">Subtotal</span>
+                    <span id="cartSubtotal" class="font-extrabold text-slate-900 text-lg">ZMW 0</span>
+                </div>
+                <button 
+                    id="checkoutBtn"
+                    onclick="openCheckoutModal()" 
+                    disabled
+                    class="w-full bg-brand-emerald hover:bg-brand-emeraldHover disabled:opacity-50 text-white font-bold py-3.5 rounded-xl shadow-md transition flex items-center justify-center gap-2">
+                    <span>Pay with Mobile Money</span>
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ZAMBIAN MOBILE MONEY CHECKOUT MODAL -->
+    <div id="checkoutModal" class="fixed inset-0 bg-slate-900/70 backdrop-blur-xs z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-slate-100">
+            
+            <div class="flex justify-between items-center pb-4 border-b border-slate-100">
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-xl bg-brand-emerald text-white flex items-center justify-center font-bold">
+                        <i data-lucide="wallet" class="w-4 h-4"></i>
+                    </div>
+                    <h3 class="font-extrabold text-slate-900 text-base">Zambian Mobile Money Payment</h3>
+                </div>
+                <button onclick="closeCheckoutModal()" class="text-slate-400 hover:text-slate-600">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <div id="checkoutFormStep" class="space-y-4 py-4">
+                <div class="bg-brand-canvas p-3 rounded-xl border border-slate-200 flex justify-between items-center">
+                    <span class="text-xs text-slate-600 font-bold uppercase">Total Payable</span>
+                    <span id="checkoutTotalAmount" class="font-extrabold text-brand-emerald text-lg">ZMW 0</span>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Select Network Provider</label>
+                    <div class="grid grid-cols-3 gap-2">
+                        <label class="border-2 border-amber-500 bg-amber-50 p-2.5 rounded-xl flex flex-col items-center justify-center cursor-pointer text-center hover:bg-amber-100 transition">
+                            <input type="radio" name="paymentProvider" value="MTN Mobile Money" checked class="sr-only" />
+                            <span class="font-extrabold text-xs text-amber-700">MTN MoMo</span>
+                            <span class="text-[10px] text-slate-500">*303#</span>
+                        </label>
+                        <label class="border border-slate-200 p-2.5 rounded-xl flex flex-col items-center justify-center cursor-pointer text-center hover:bg-slate-50 transition">
+                            <input type="radio" name="paymentProvider" value="Airtel Money" class="sr-only" />
+                            <span class="font-extrabold text-xs text-red-600">Airtel Money</span>
+                            <span class="text-[10px] text-slate-500">*115#</span>
+                        </label>
+                        <label class="border border-slate-200 p-2.5 rounded-xl flex flex-col items-center justify-center cursor-pointer text-center hover:bg-slate-50 transition">
+                            <input type="radio" name="paymentProvider" value="Zamtel Kwacha" class="sr-only" />
+                            <span class="font-extrabold text-xs text-green-700">Zamtel</span>
+                            <span class="text-[10px] text-slate-500">*115#</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Mobile Money Number</label>
+                    <input type="tel" id="checkoutPhone" placeholder="097X XXX XXX / 096X XXX XXX" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:bg-white focus:border-brand-emerald outline-none font-bold text-slate-900" />
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Delivery Address / Town</label>
+                    <input type="text" id="checkoutAddress" placeholder="e.g. Plot 14, Great East Rd, Lusaka" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:bg-white focus:border-brand-emerald outline-none font-medium" />
+                </div>
+
+                <button 
+                    onclick="processPaymentSimulation()" 
+                    class="w-full bg-brand-emerald hover:bg-brand-emeraldHover text-white font-bold py-3.5 rounded-xl shadow-lg transition flex items-center justify-center gap-2 text-sm mt-2">
+                    <i data-lucide="lock" class="w-4 h-4"></i>
+                    <span>Authorise Payment Prompt</span>
+                </button>
+            </div>
+
+            <!-- PROMPT STATE -->
+            <div id="checkoutProcessingStep" class="hidden py-8 text-center space-y-4">
+                <div class="w-16 h-16 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mx-auto animate-bounce">
+                    <i data-lucide="smartphone" class="w-8 h-8"></i>
+                </div>
+                <h4 class="font-extrabold text-slate-900 text-base">Check Your Mobile Phone!</h4>
+                <p class="text-xs text-slate-600 max-w-xs mx-auto">
+                    A USSD popup prompt has been sent to your phone. Enter your Mobile Money PIN to authorize <span id="promptAmount" class="font-bold text-brand-emerald"></span>.
+                </p>
+                <div class="flex justify-center gap-2 pt-2">
+                    <div class="w-2.5 h-2.5 rounded-full bg-brand-emerald animate-ping"></div>
+                    <div class="w-2.5 h-2.5 rounded-full bg-brand-emerald animate-ping delay-100"></div>
+                    <div class="w-2.5 h-2.5 rounded-full bg-brand-emerald animate-ping delay-200"></div>
+                </div>
+            </div>
+
+            <!-- SUCCESS STATE -->
+            <div id="checkoutSuccessStep" class="hidden py-6 text-center space-y-4">
+                <div class="w-16 h-16 bg-emerald-100 text-brand-emerald rounded-full flex items-center justify-center mx-auto">
+                    <i data-lucide="check-circle" class="w-10 h-10"></i>
+                </div>
+                <h4 class="font-extrabold text-slate-900 text-xl">Payment Verified!</h4>
+                <p class="text-xs text-slate-600 max-w-xs mx-auto">
+                    Your order has been logged into our local fulfillment queue. You will receive SMS updates.
+                </p>
+                <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 text-left text-xs space-y-1">
+                    <div class="flex justify-between"><span class="text-slate-400">Order Ref:</span> <span id="successOrderId" class="font-mono font-bold"></span></div>
+                    <div class="flex justify-between"><span class="text-slate-400">Delivery Status:</span> <span class="font-bold text-brand-emerald">Processing Dispatch</span></div>
+                </div>
+                <button onclick="closeCheckoutModal()" class="w-full bg-slate-900 text-white font-bold py-3 rounded-xl text-xs">
+                    Close Receipt
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ADMIN MANAGEMENT MODAL -->
+    <div id="adminModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-4xl w-full max-h-[85vh] flex flex-col shadow-2xl overflow-hidden">
+            <div class="p-5 bg-slate-900 text-white flex justify-between items-center">
+                <div class="flex items-center gap-2">
+                    <i data-lucide="layout-dashboard" class="w-5 h-5 text-amber-400"></i>
+                    <h3 class="font-extrabold text-base">Nicho-Xpress Sourcing & Order Management</h3>
+                </div>
+                <button onclick="closeAdminModal()" class="text-slate-400 hover:text-white">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <div class="p-6 overflow-y-auto flex-1 space-y-6">
+                <!-- CUSTOM SOURCING REQUESTS -->
+                <div>
+                    <h4 class="font-extrabold text-slate-900 text-sm mb-3 flex items-center gap-2">
+                        <i data-lucide="compass" class="w-4 h-4 text-brand-copper"></i>
+                        Incoming Custom Sourcing Requests (<span id="adminSourcingCount">0</span>)
+                    </h4>
+                    <div class="overflow-x-auto border border-slate-200 rounded-xl">
+                        <table class="w-full text-left text-xs">
+                            <thead class="bg-slate-100 text-slate-700 font-bold border-b border-slate-200">
+                                <tr>
+                                    <th class="p-3">Item Description</th>
+                                    <th class="p-3">Image</th>
+                                    <th class="p-3">Customer Contact</th>
+                                    <th class="p-3">Budget</th>
+                                    <th class="p-3">Status Control</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminSourcingTable" class="divide-y divide-slate-100">
+                                <!-- Dynamic rows -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- DIRECT STORE ORDERS -->
+                <div>
+                    <h4 class="font-extrabold text-slate-900 text-sm mb-3 flex items-center gap-2">
+                        <i data-lucide="shopping-bag" class="w-4 h-4 text-brand-emerald"></i>
+                        Direct Paid Orders (<span id="adminOrdersCount">0</span>)
+                    </h4>
+                    <div class="overflow-x-auto border border-slate-200 rounded-xl">
+                        <table class="w-full text-left text-xs">
+                            <thead class="bg-slate-100 text-slate-700 font-bold border-b border-slate-200">
+                                <tr>
+                                    <th class="p-3">Order ID</th>
+                                    <th class="p-3">Phone</th>
+                                    <th class="p-3">Total Paid</th>
+                                    <th class="p-3">Provider</th>
+                                    <th class="p-3">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminOrdersTable" class="divide-y divide-slate-100">
+                                <!-- Dynamic rows -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- APPLICATION JAVASCRIPT LOGIC -->
+    <script>
+        // CATALOG DATA
+        const catalogProducts = [
+            {
+                id: 'prod-1',
+                name: 'Solar Power Generator 1200W (Pure Sine Wave)',
+                category: 'Solar',
+                price: 8900,
+                fulfillment: 'local',
+                badge: '⚡ Local Stock (Lusaka)',
+                deliveryTime: 'Delivered in 24 hrs',
+                image: 'https://images.unsplash.com/photo-1620714223084-8fcacc6dfd8d?auto=format&fit=crop&w=600&q=80',
+                description: 'Heavy duty load-shedding power supply. Runs TV, router, & lights.'
+            },
+            {
+                id: 'prod-2',
+                name: 'PlayStation 5 Slim 1TB Console',
+                category: 'Electronics',
+                price: 11500,
+                fulfillment: 'local',
+                badge: '⚡ Local Stock (Ndola)',
+                deliveryTime: 'Delivered in 24 hrs',
+                image: 'https://images.unsplash.com/photo-1606813907291-d86efa9b94db?auto=format&fit=crop&w=600&q=80',
+                description: 'Original brand new factory sealed with DualSense Wireless Controller.'
+            },
+            {
+                id: 'prod-3',
+                name: 'Sony WH-1000XM5 ANC Wireless Headphones',
+                category: 'Electronics',
+                price: 5200,
+                fulfillment: 'overseas',
+                badge: '✈️ Overseas Import',
+                deliveryTime: 'Delivered in 10-12 days',
+                image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&q=80',
+                description: 'Industry leading noise cancellation. Direct UK import.'
+            },
+            {
+                id: 'prod-4',
+                name: 'Anker 100W Foldable Solar Charger Panel',
+                category: 'Solar',
+                price: 3200,
+                fulfillment: 'overseas',
+                badge: '✈️ Overseas Import',
+                deliveryTime: 'Delivered in 10-14 days',
+                image: 'https://images.unsplash.com/photo-1509391365360-2e959784a276?auto=format&fit=crop&w=600&q=80',
+                description: 'High efficiency solar cell charger for laptops and mobile stations.'
+            },
+            {
+                id: 'prod-5',
+                name: 'Apple iPhone 15 Pro 256GB Titanium',
+                category: 'Electronics',
+                price: 24800,
+                fulfillment: 'local',
+                badge: '⚡ Local Stock (Lusaka)',
+                deliveryTime: 'Delivered in 24 hrs',
+                image: 'https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=600&q=80',
+                description: 'Un-locked dual SIM titanium model with full warranty.'
+            },
+            {
+                id: 'prod-6',
+                name: 'Nike Air Force 1 "07 Triple White',
+                category: 'Fashion',
+                price: 1750,
+                fulfillment: 'local',
+                badge: '⚡ Local Stock (Lusaka)',
+                deliveryTime: 'Delivered in 24 hrs',
+                image: 'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=600&q=80',
+                description: 'Classic crisp white sneakers. All standard sizes available.'
+            }
+        ];
+
+        // GLOBAL APP STATE
+        let cart = [];
+        let sourcingRequests = [
+            {
+                id: 'SRC-101',
+                item: 'Toyota Hilux GD-6 Turbo Charger Unit',
+                category: 'Auto Parts',
+                budget: '14500',
+                name: 'Mwape Chibwe',
+                phone: '0977443322',
+                status: 'Contacted Customer',
+                image: null
+            }
+        ];
+        let placedOrders = [];
+        let helperUploadedImage = null;
+        let sourcingUploadedImage = null;
+        let assistantTriggered = false;
+
+        // LIVE ACTIVITY RIBBON DATA & ENGINE
+        const liveTickerEvents = [
+            { icon: '🛍️', text: '<strong>Mulenga M.</strong> from <span class="text-amber-300">Lusaka</span> just purchased <span class="text-emerald-300 font-bold">AirPods Pro Gen 2</span> (ZMW 3,800) via MTN MoMo' },
+            { icon: '✈️', text: '<strong>Direct Import Batch:</strong> <span class="text-amber-300">Guangzhou Hub ➔ Lusaka</span> dispatched 14 customer custom orders' },
+            { icon: '📦', text: '<strong>Chileshe T.</strong> from <span class="text-amber-300">Kitwe</span> ordered <span class="text-emerald-300 font-bold">Solar Power Generator 1200W</span>' },
+            { icon: '📦', text: '<strong>Kabwe Customer (*2819)</strong> requested a quote for <span class="text-amber-300">Toyota Axio Headlight Set</span>' },
+            { icon: '⚡', text: '<strong>Bwalya K.</strong> from <span class="text-amber-300">Ndola</span> bought <span class="text-emerald-300 font-bold">PlayStation 5 Slim 1TB</span> (ZMW 11,500)' },
+            { icon: '✈️', text: '<strong>Sourcing Concierge:</strong> <span class="text-amber-300">Dubai Hub</span> verified 8 auto-spare parts for delivery to Livingstone' },
+            { icon: '🛍️', text: '<strong>Naveen S.</strong> from <span class="text-amber-300">Lusaka</span> purchased <span class="text-emerald-300 font-bold">Sony WH-1000XM5 Headphones</span>' }
+        ];
+
+        let tickerIndex = 0;
+
+        function startLiveTicker() {
+            const tickerEl = document.getElementById('liveTickerText');
+            if (!tickerEl) return;
+
+            function updateTicker() {
+                // Slide out up
+                tickerEl.classList.add('-translate-y-6', 'opacity-0');
+
+                setTimeout(() => {
+                    const evt = liveTickerEvents[tickerIndex];
+                    tickerEl.innerHTML = `<span class="text-sm">${evt.icon}</span> <span>${evt.text}</span>`;
+                    
+                    // Reset position below view
+                    tickerEl.classList.remove('-translate-y-6');
+                    tickerEl.classList.add('translate-y-6');
+
+                    setTimeout(() => {
+                        // Slide in from bottom
+                        tickerEl.classList.remove('translate-y-6', 'opacity-0');
+                    }, 50);
+
+                    tickerIndex = (tickerIndex + 1) % liveTickerEvents.length;
+                }, 400);
+            }
+
+            updateTicker();
+            setInterval(updateTicker, 4000); // Rotates every 4 seconds
+        }
+
+        // INITIALIZE ON LOAD
+        window.onload = function() {
+            renderProducts(catalogProducts);
+            lucide.createIcons();
+            startLiveTicker();
+
+            // Auto-trigger proactive scroll assistant after scrolling ~25% down
+            window.addEventListener('scroll', () => {
+                if (!assistantTriggered && window.scrollY > (document.body.scrollHeight * 0.25)) {
+                    assistantTriggered = true;
+                    openProactiveAssistantModal();
+                }
+            });
+        };
+
+        // RENDER PRODUCTS
+        function renderProducts(products) {
+            const grid = document.getElementById('productGrid');
+            const fallbackCard = document.getElementById('searchFallbackCard');
+            grid.innerHTML = '';
+
+            if (products.length === 0) {
+                fallbackCard.classList.remove('hidden');
+                document.getElementById('fallbackItemName').innerText = document.getElementById('globalSearchInput').value || 'Requested Item';
+                return;
+            } else {
+                fallbackCard.classList.add('hidden');
+            }
+
+            products.forEach(p => {
+                const card = document.createElement('div');
+                card.className = "bg-white rounded-3xl border border-slate-200/80 overflow-hidden shadow-xs hover:shadow-md transition duration-200 flex flex-col justify-between group";
+                
+                const isLocal = p.fulfillment === 'local';
+                const badgeStyle = isLocal 
+                    ? 'bg-emerald-100 text-brand-emerald border-emerald-200' 
+                    : 'bg-brand-copperLight text-brand-copper border-brand-copper/30';
+
+                card.innerHTML = `
+                    <div>
+                        <div class="relative h-48 bg-slate-100 overflow-hidden">
+                            <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
+                            <div class="absolute top-3 left-3 px-3 py-1 rounded-full text-[11px] font-extrabold border ${badgeStyle}">
+                                ${p.badge}
+                            </div>
+                        </div>
+                        <div class="p-4 space-y-2">
+                            <div class="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">${p.category}</div>
+                            <h3 class="font-extrabold text-slate-900 text-sm line-clamp-1">${p.name}</h3>
+                            <p class="text-xs text-slate-500 line-clamp-2 leading-relaxed">${p.description}</p>
+                            <div class="text-[11px] text-slate-600 font-semibold flex items-center gap-1 pt-1">
+                                <i data-lucide="truck" class="w-3.5 h-3.5 text-brand-emerald"></i> ${p.deliveryTime}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-4 pt-0 border-t border-slate-100 mt-2 flex items-center justify-between">
+                        <div>
+                            <div class="text-[10px] text-slate-400 font-bold uppercase">Price</div>
+                            <div class="font-black text-slate-900 text-base">ZMW ${p.price.toLocaleString()}</div>
+                        </div>
+                        <button 
+                            onclick="addToCart('${p.id}')" 
+                            class="bg-brand-emerald hover:bg-brand-emeraldHover text-white font-bold px-3.5 py-2.5 rounded-xl transition shadow-xs flex items-center gap-1 text-xs">
+                            <i data-lucide="plus" class="w-4 h-4"></i> Add
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+
+            lucide.createIcons();
+        }
+
+        // GLOBAL SEARCH HANDLER
+        function handleSearchInput(query) {
+            const q = query.trim().toLowerCase();
+            const searchHeader = document.getElementById('searchHeader');
+            
+            if (q.length > 0) {
+                searchHeader.classList.remove('hidden');
+                document.getElementById('searchQueryTerm').innerText = query;
+
+                const filtered = catalogProducts.filter(p => 
+                    p.name.toLowerCase().includes(q) ||
+                    p.category.toLowerCase().includes(q) ||
+                    p.description.toLowerCase().includes(q)
+                );
+
+                document.getElementById('searchCountText').innerText = filtered.length > 0
+                    ? `Found ${filtered.length} matching store items.`
+                    : `No direct store match found. Nicho-Xpress will fetch this custom for you!`;
+
+                renderProducts(filtered);
+            } else {
+                resetSearch();
+            }
+        }
+
+        function resetSearch() {
+            document.getElementById('globalSearchInput').value = '';
+            document.getElementById('searchHeader').classList.add('hidden');
+            renderProducts(catalogProducts);
+        }
+
+        function filterCategory(cat, btn) {
+            document.querySelectorAll('.cat-btn').forEach(b => {
+                b.classList.remove('bg-brand-emerald', 'text-white');
+                b.classList.add('hover:bg-white', 'text-slate-700');
+            });
+            btn.classList.add('bg-brand-emerald', 'text-white');
+
+            if (cat === 'all') {
+                renderProducts(catalogProducts);
+            } else if (cat === 'local' || cat === 'overseas') {
+                renderProducts(catalogProducts.filter(p => p.fulfillment === cat));
+            } else {
+                renderProducts(catalogProducts.filter(p => p.category.toLowerCase() === cat.toLowerCase()));
+            }
+        }
+
+        // CENTERED PROACTIVE ASSISTANT MODAL
+        function openProactiveAssistantModal(prefill = '') {
+            document.getElementById('proactiveAssistantModal').classList.remove('hidden');
+            document.getElementById('helperInputStep').classList.remove('hidden');
+            document.getElementById('helperScanningStep').classList.add('hidden');
+            document.getElementById('helperResultStep').classList.add('hidden');
+
+            if (prefill) {
+                document.getElementById('helperTextInput').value = prefill;
+            }
+        }
+
+        function closeProactiveAssistantModal() {
+            document.getElementById('proactiveAssistantModal').classList.add('hidden');
+        }
+
+        function handleHelperImageUpload(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(evt) {
+                    helperUploadedImage = evt.target.result;
+                    document.getElementById('helperImagePreview').src = helperUploadedImage;
+                    document.getElementById('helperImagePreviewBox').classList.remove('hidden');
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function removeHelperImage() {
+            helperUploadedImage = null;
+            document.getElementById('helperImagePreviewBox').classList.add('hidden');
+            document.getElementById('helperImageFile').value = '';
+        }
+
+        function runSimulatedHelperCheck() {
+            const queryText = document.getElementById('helperTextInput').value.trim();
+
+            if (!queryText && !helperUploadedImage) {
+                alert('Please enter an item name or attach a photo first.');
+                return;
+            }
+
+            document.getElementById('helperInputStep').classList.add('hidden');
+            document.getElementById('helperScanningStep').classList.remove('hidden');
+
+            setTimeout(() => {
+                // Check if text matches any existing product in catalog
+                const matchLocal = catalogProducts.find(p => queryText && p.name.toLowerCase().includes(queryText.toLowerCase()));
+
+                document.getElementById('helperScanningStep').classList.add('hidden');
+                document.getElementById('helperResultStep').classList.remove('hidden');
+
+                const container = document.getElementById('helperResultContainer');
+
+                if (matchLocal) {
+                    container.innerHTML = `
+                        <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-4 space-y-3">
+                            <div class="inline-flex items-center gap-1.5 bg-brand-emerald text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full uppercase">
+                                ⚡ Found in Local Stock (Zambia)!
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <img src="${matchLocal.image}" class="w-16 h-16 object-cover rounded-xl border border-slate-200" />
+                                <div>
+                                    <h4 class="font-extrabold text-slate-900 text-sm">${matchLocal.name}</h4>
+                                    <div class="text-brand-emerald font-black text-sm">ZMW ${matchLocal.price.toLocaleString()}</div>
+                                    <div class="text-[10px] text-slate-500">Delivered in 24 hours in Lusaka / Ndola</div>
+                                </div>
+                            </div>
+                            <button onclick="closeProactiveAssistantModal(); addToCart('${matchLocal.id}');" class="w-full bg-brand-emerald hover:bg-brand-emeraldHover text-white font-bold py-2.5 rounded-xl text-xs">
+                                Add To Cart & Checkout
+                            </button>
+                        </div>
+                    `;
+                } else {
+                    const itemDisplay = queryText || 'Uploaded Photo Item';
+                    container.innerHTML = `
+                        <div class="bg-brand-copperLight border border-brand-copper/30 rounded-2xl p-4 space-y-3">
+                            <div class="inline-flex items-center gap-1.5 bg-brand-copper text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full uppercase">
+                                ✈️ Unlisted Item - Direct Overseas Import
+                            </div>
+                            <h4 class="font-extrabold text-slate-900 text-sm">"${itemDisplay}"</h4>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                This item isn't in standard Zambian local store stock, but our concierge team can source it overseas and deliver it to your doorstep in 10-14 days!
+                            </p>
+                            <button onclick="closeProactiveAssistantModal(); openSourcingModalWithData('${itemDisplay}');" class="w-full bg-brand-copper hover:bg-brand-copperHover text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-2">
+                                <i data-lucide="send" class="w-4 h-4"></i>
+                                <span>Request Kwacha Quote & Order</span>
+                            </button>
+                        </div>
+                    `;
+                }
+                lucide.createIcons();
+            }, 2000);
+        }
+
+        // SOURCING MODAL PREFILL
+        function openSourcingModalWithData(itemName) {
+            openSourcingModal(itemName);
+            if (helperUploadedImage) {
+                sourcingUploadedImage = helperUploadedImage;
+                document.getElementById('sourcingPreviewImg').src = sourcingUploadedImage;
+                document.getElementById('sourcingPlaceholder').classList.add('hidden');
+                document.getElementById('sourcingPreviewBox').classList.remove('hidden');
+            }
+        }
+
+        function openSourcingModal(itemName = '') {
+            document.getElementById('sourcingModal').classList.remove('hidden');
+            if (itemName) {
+                document.getElementById('sourcingItemName').value = itemName;
+            }
+        }
+
+        function closeSourcingModal() {
+            document.getElementById('sourcingModal').classList.add('hidden');
+        }
+
+        function previewSourcingImage(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(evt) {
+                    sourcingUploadedImage = evt.target.result;
+                    document.getElementById('sourcingPreviewImg').src = sourcingUploadedImage;
+                    document.getElementById('sourcingPlaceholder').classList.add('hidden');
+                    document.getElementById('sourcingPreviewBox').classList.remove('hidden');
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function handleSourcingSubmit(e) {
+            e.preventDefault();
+            const item = document.getElementById('sourcingItemName').value;
+            const category = document.getElementById('sourcingCategory').value;
+            const budget = document.getElementById('sourcingBudget').value;
+            const name = document.getElementById('sourcingName').value;
+            const phone = document.getElementById('sourcingPhone').value;
+
+            const newReq = {
+                id: 'SRC-' + Math.floor(100 + Math.random() * 900),
+                item: item,
+                category: category,
+                budget: budget || 'Negotiable',
+                name: name,
+                phone: phone,
+                status: 'Pending Verification',
+                image: sourcingUploadedImage
+            };
+
+            sourcingRequests.unshift(newReq);
+            closeSourcingModal();
+            document.getElementById('sourcingForm').reset();
+            sourcingUploadedImage = null;
+
+            alert(`✅ Request Received!\n\nHi ${name}, our agent will verify supplier stock & import fees for "${item}" and WhatsApp/call you at ${phone} with a ZMW quotation!`);
+        }
+
+        // CART LOGIC
+        function toggleCartDrawer() {
+            document.getElementById('cartDrawer').classList.toggle('hidden');
+        }
+
+        function addToCart(pId) {
+            const product = catalogProducts.find(p => p.id === pId);
+            if (!product) return;
+
+            const existing = cart.find(c => c.id === pId);
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                cart.push({ ...product, qty: 1 });
+            }
+
+            updateCartUI();
+            toggleCartDrawer();
+        }
+
+        function updateCartUI() {
+            const badge = document.getElementById('cartBadge');
+            const totalQty = cart.reduce((sum, i) => sum + i.qty, 0);
+            badge.innerText = totalQty;
+
+            const list = document.getElementById('cartItemsList');
+            list.innerHTML = '';
+
+            if (cart.length === 0) {
+                list.innerHTML = `
+                    <div class="text-center py-12 text-slate-400 space-y-2">
+                        <i data-lucide="shopping-cart" class="w-12 h-12 mx-auto stroke-1"></i>
+                        <p class="text-xs font-semibold">Your cart is empty.</p>
+                    </div>
+                `;
+                document.getElementById('cartSubtotal').innerText = 'ZMW 0';
+                document.getElementById('checkoutBtn').disabled = true;
+                lucide.createIcons();
+                return;
+            }
+
+            document.getElementById('checkoutBtn').disabled = false;
+            let subtotal = 0;
+
+            cart.forEach(i => {
+                subtotal += (i.price * i.qty);
+                const itemRow = document.createElement('div');
+                itemRow.className = "flex items-center gap-3 bg-slate-50 p-3 rounded-2xl border border-slate-200/80";
+                itemRow.innerHTML = `
+                    <img src="${i.image}" class="w-14 h-14 object-cover rounded-xl border border-slate-200" />
+                    <div class="flex-1">
+                        <h4 class="font-extrabold text-xs text-slate-900 line-clamp-1">${i.name}</h4>
+                        <div class="text-xs text-brand-emerald font-black">ZMW ${i.price.toLocaleString()}</div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-extrabold text-slate-700">x${i.qty}</span>
+                        <button onclick="removeFromCart('${i.id}')" class="text-slate-400 hover:text-red-500">
+                            <i data-lucide="trash-2" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                `;
+                list.appendChild(itemRow);
+            });
+
+            document.getElementById('cartSubtotal').innerText = `ZMW ${subtotal.toLocaleString()}`;
+            document.getElementById('checkoutTotalAmount').innerText = `ZMW ${subtotal.toLocaleString()}`;
+            lucide.createIcons();
+        }
+
+        function removeFromCart(id) {
+            cart = cart.filter(c => c.id !== id);
+            updateCartUI();
+        }
+
+        // CHECKOUT & USSD SIMULATION
+        function openCheckoutModal() {
+            toggleCartDrawer();
+            document.getElementById('checkoutModal').classList.remove('hidden');
+            document.getElementById('checkoutFormStep').classList.remove('hidden');
+            document.getElementById('checkoutProcessingStep').classList.add('hidden');
+            document.getElementById('checkoutSuccessStep').classList.add('hidden');
+        }
+
+        function closeCheckoutModal() {
+            document.getElementById('checkoutModal').classList.add('hidden');
+        }
+
+        function processPaymentSimulation() {
+            const phone = document.getElementById('checkoutPhone').value;
+            const address = document.getElementById('checkoutAddress').value;
+
+            if (!phone || !address) {
+                alert('Please enter your Mobile Money number and delivery address.');
+                return;
+            }
+
+            const total = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
+            const provider = document.querySelector('input[name="paymentProvider"]:checked').value;
+
+            document.getElementById('checkoutFormStep').classList.add('hidden');
+            document.getElementById('checkoutProcessingStep').classList.remove('hidden');
+            document.getElementById('promptAmount').innerText = `ZMW ${total.toLocaleString()}`;
+
+            setTimeout(() => {
+                document.getElementById('checkoutProcessingStep').classList.add('hidden');
+                document.getElementById('checkoutSuccessStep').classList.remove('hidden');
+
+                const ref = 'NX-' + Math.floor(100000 + Math.random() * 900000);
+                document.getElementById('successOrderId').innerText = ref;
+
+                placedOrders.unshift({
+                    id: ref,
+                    phone: phone,
+                    amount: total,
+                    provider: provider,
+                    status: 'Paid'
+                });
+
+                cart = [];
+                updateCartUI();
+            }, 3000);
+        }
+
+        // ADMIN PANEL
+        function openAdminModal() {
+            document.getElementById('adminModal').classList.remove('hidden');
+            renderAdminTables();
+        }
+
+        function closeAdminModal() {
+            document.getElementById('adminModal').classList.add('hidden');
+        }
+
+        function renderAdminTables() {
+            document.getElementById('adminSourcingCount').innerText = sourcingRequests.length;
+            document.getElementById('adminOrdersCount').innerText = placedOrders.length;
+
+            const srcTbody = document.getElementById('adminSourcingTable');
+            srcTbody.innerHTML = '';
+            sourcingRequests.forEach((req, idx) => {
+                const tr = document.createElement('tr');
+                const imgThumb = req.image 
+                    ? `<img src="${req.image}" class="w-8 h-8 object-cover rounded border" />`
+                    : `<span class="text-slate-400 text-[10px]">No Photo</span>`;
+
+                tr.innerHTML = `
+                    <td class="p-3 font-bold text-slate-800">${req.item}</td>
+                    <td class="p-3">${imgThumb}</td>
+                    <td class="p-3">${req.name}<br><span class="text-[10px] text-slate-400">${req.phone}</span></td>
+                    <td class="p-3 font-bold text-brand-emerald">ZMW ${req.budget}</td>
+                    <td class="p-3">
+                        <select onchange="updateSourcingStatus(${idx}, this.value)" class="text-[10px] font-bold p-1 bg-slate-50 border rounded text-slate-700">
+                            <option value="Pending Verification" ${req.status === 'Pending Verification' ? 'selected' : ''}>Pending Verification</option>
+                            <option value="Contacted Customer" ${req.status === 'Contacted Customer' ? 'selected' : ''}>Contacted Customer</option>
+                            <option value="Purchased Overseas" ${req.status === 'Purchased Overseas' ? 'selected' : ''}>Purchased Overseas</option>
+                            <option value="Delivered" ${req.status === 'Delivered' ? 'selected' : ''}>Delivered</option>
+                        </select>
+                    </td>
+                `;
+                srcTbody.appendChild(tr);
+            });
+
+            const ordTbody = document.getElementById('adminOrdersTable');
+            ordTbody.innerHTML = '';
+            placedOrders.forEach(ord => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td class="p-3 font-mono font-bold text-slate-800">${ord.id}</td>
+                    <td class="p-3">${ord.phone}</td>
+                    <td class="p-3 font-bold text-brand-emerald">ZMW ${ord.amount.toLocaleString()}</td>
+                    <td class="p-3 font-semibold text-slate-600">${ord.provider}</td>
+                    <td class="p-3"><span class="bg-emerald-100 text-brand-emerald font-extrabold px-2 py-0.5 rounded text-[10px]">${ord.status}</span></td>
+                `;
+                ordTbody.appendChild(tr);
+            });
+        }
+
+        function updateSourcingStatus(idx, status) {
+            sourcingRequests[idx].status = status;
+        }
+    </script>
+</body>
+</html>
